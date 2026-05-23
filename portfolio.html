@@ -1,0 +1,951 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>Sonali Pramanik | Assistant Software Engineer | SRE & DevOps</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com" />
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet" />
+	<style>
+		:root {
+			--bg: #050816;
+			--bg-2: #091427;
+			--surface: rgba(10, 17, 33, 0.74);
+			--surface-strong: rgba(13, 21, 39, 0.92);
+			--line: rgba(152, 181, 255, 0.16);
+			--ink: #f4f7ff;
+			--muted: rgba(226, 234, 255, 0.72);
+			--accent: #7c9dff;
+			--accent-2: #47f3d4;
+			--accent-3: #ff7ac8;
+			--glow: 0 24px 80px rgba(44, 108, 255, 0.24);
+			--radius-xl: 30px;
+			--radius-lg: 22px;
+			--radius-md: 16px;
+		}
+
+		* {
+			box-sizing: border-box;
+			margin: 0;
+			padding: 0;
+		}
+
+		html {
+			scroll-behavior: smooth;
+		}
+
+		body {
+			font-family: "Inter", sans-serif;
+			color: var(--ink);
+			background:
+				radial-gradient(circle at 20% 10%, rgba(124, 157, 255, 0.22), transparent 28%),
+				radial-gradient(circle at 82% 18%, rgba(71, 243, 212, 0.16), transparent 24%),
+				radial-gradient(circle at 50% 100%, rgba(255, 122, 200, 0.12), transparent 30%),
+				linear-gradient(180deg, #040816 0%, #060d1c 42%, #050816 100%);
+			min-height: 100vh;
+			line-height: 1.65;
+			overflow-x: hidden;
+		}
+
+		body::before,
+		body::after {
+			content: "";
+			position: fixed;
+			inset: 0;
+			pointer-events: none;
+			z-index: 0;
+		}
+
+		body::before {
+			background-image:
+				linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+				linear-gradient(90deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
+			background-size: 72px 72px;
+			mask-image: radial-gradient(circle at center, rgba(0, 0, 0, 0.95), transparent 78%);
+		}
+
+		body::after {
+			background: radial-gradient(circle at center, transparent 0 55%, rgba(5, 8, 22, 0.62) 78%, rgba(5, 8, 22, 0.9) 100%);
+		}
+
+		.page {
+			position: relative;
+			z-index: 1;
+			max-width: 1240px;
+			margin: 0 auto;
+			padding: 24px;
+		}
+
+		.shell {
+			position: relative;
+			border: 1px solid var(--line);
+			border-radius: 36px;
+			overflow: hidden;
+			background: linear-gradient(180deg, rgba(9, 16, 32, 0.88), rgba(5, 10, 24, 0.96));
+			box-shadow: var(--glow);
+			backdrop-filter: blur(24px);
+			transform-style: preserve-3d;
+		}
+
+		.shell::before {
+			content: "";
+			position: absolute;
+			inset: -2px;
+			background: linear-gradient(120deg, rgba(124, 157, 255, 0.45), rgba(71, 243, 212, 0.18), rgba(255, 122, 200, 0.35));
+			filter: blur(36px);
+			opacity: 0.42;
+			z-index: 0;
+		}
+
+		.topbar,
+		.hero,
+		.section,
+		.footer {
+			position: relative;
+			z-index: 1;
+		}
+
+		.topbar {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			gap: 16px;
+			padding: 22px 28px;
+			border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+			background: rgba(8, 13, 26, 0.46);
+			backdrop-filter: blur(18px);
+		}
+
+		.brand {
+			display: flex;
+			flex-direction: column;
+			gap: 4px;
+		}
+
+		.brand strong {
+			font-family: "Space Grotesk", sans-serif;
+			font-size: 1rem;
+			letter-spacing: 0.08em;
+			text-transform: uppercase;
+		}
+
+		.brand span,
+		.nav a {
+			color: var(--muted);
+			font-size: 0.92rem;
+		}
+
+		.nav {
+			display: flex;
+			flex-wrap: wrap;
+			gap: 10px;
+		}
+
+		.nav a {
+			text-decoration: none;
+			padding: 10px 14px;
+			border: 1px solid rgba(255, 255, 255, 0.08);
+			border-radius: 999px;
+			background: rgba(255, 255, 255, 0.03);
+			transition: transform 180ms ease, border-color 180ms ease, color 180ms ease, background 180ms ease;
+		}
+
+		.nav a:hover {
+			transform: translateY(-2px);
+			color: var(--ink);
+			border-color: rgba(124, 157, 255, 0.4);
+			background: rgba(124, 157, 255, 0.12);
+		}
+
+		.hero {
+			padding: 34px 28px 30px;
+			min-height: 560px;
+			display: grid;
+			grid-template-columns: 1.15fr 0.85fr;
+			gap: 24px;
+			align-items: stretch;
+			background:
+				linear-gradient(145deg, rgba(124, 157, 255, 0.18), rgba(7, 12, 26, 0.2) 55%),
+				radial-gradient(circle at 78% 22%, rgba(71, 243, 212, 0.17), transparent 26%),
+				radial-gradient(circle at 18% 12%, rgba(255, 122, 200, 0.14), transparent 28%);
+		}
+
+		.hero-copy,
+		.hero-visual,
+		.card,
+		.project,
+		.metric,
+		.badge,
+		.panel {
+			border: 1px solid rgba(255, 255, 255, 0.08);
+			background: rgba(255, 255, 255, 0.04);
+			backdrop-filter: blur(18px);
+		}
+
+		.hero-copy {
+			border-radius: 34px;
+			padding: 32px;
+			position: relative;
+			overflow: hidden;
+			box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
+		}
+
+		.hero-copy::before {
+			content: "";
+			position: absolute;
+			inset: 0;
+			background: radial-gradient(circle at top right, rgba(124, 157, 255, 0.18), transparent 30%);
+			pointer-events: none;
+		}
+
+		.kicker {
+			display: inline-flex;
+			align-items: center;
+			gap: 10px;
+			padding: 10px 14px;
+			border-radius: 999px;
+			background: rgba(71, 243, 212, 0.08);
+			border: 1px solid rgba(71, 243, 212, 0.18);
+			color: #d9fff7;
+			font-size: 0.88rem;
+			font-weight: 600;
+			letter-spacing: 0.08em;
+			text-transform: uppercase;
+		}
+
+		.kicker::before {
+			content: "";
+			width: 8px;
+			height: 8px;
+			border-radius: 50%;
+			background: linear-gradient(135deg, var(--accent-2), var(--accent));
+			box-shadow: 0 0 18px rgba(71, 243, 212, 0.9);
+		}
+
+		h1,
+		h2,
+		h3,
+		h4 {
+			font-family: "Space Grotesk", sans-serif;
+		}
+
+		h1 {
+			margin-top: 18px;
+			font-size: clamp(2.8rem, 7vw, 5.8rem);
+			line-height: 0.96;
+			letter-spacing: -0.05em;
+		}
+
+		.hero-subtitle {
+			margin-top: 16px;
+			font-size: clamp(1.05rem, 2vw, 1.28rem);
+			max-width: 58ch;
+			color: rgba(240, 245, 255, 0.88);
+		}
+
+		.hero-subtitle strong {
+			color: white;
+		}
+
+		.contact-row {
+			display: flex;
+			flex-wrap: wrap;
+			gap: 10px;
+			margin-top: 22px;
+		}
+
+		.contact-chip {
+			display: inline-flex;
+			align-items: center;
+			gap: 8px;
+			padding: 11px 14px;
+			border-radius: 999px;
+			background: rgba(255, 255, 255, 0.05);
+			border: 1px solid rgba(255, 255, 255, 0.08);
+			color: var(--ink);
+			text-decoration: none;
+			font-size: 0.92rem;
+			transition: transform 180ms ease, border-color 180ms ease, background 180ms ease;
+		}
+
+		.contact-chip:hover {
+			transform: translateY(-2px);
+			border-color: rgba(124, 157, 255, 0.42);
+			background: rgba(124, 157, 255, 0.1);
+		}
+
+		.hero-stats {
+			display: grid;
+			grid-template-columns: repeat(2, minmax(0, 1fr));
+			gap: 14px;
+			margin-top: 28px;
+		}
+
+		.metric {
+			border-radius: 24px;
+			padding: 18px;
+			background: linear-gradient(180deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.03));
+			box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
+		}
+
+		.metric strong {
+			display: block;
+			font-size: 1.5rem;
+			line-height: 1.1;
+		}
+
+		.metric span {
+			display: block;
+			margin-top: 8px;
+			color: var(--muted);
+			font-size: 0.92rem;
+		}
+
+		.hero-visual {
+			border-radius: 34px;
+			padding: 22px;
+			position: relative;
+			min-height: 100%;
+			overflow: hidden;
+			transform: perspective(1200px) rotateY(-12deg) rotateX(8deg);
+			transition: transform 420ms ease;
+		}
+
+		.hero-visual:hover {
+			transform: perspective(1200px) rotateY(-8deg) rotateX(4deg) translateY(-3px);
+		}
+
+		.orb,
+		.orb::before,
+		.orb::after {
+			position: absolute;
+			border-radius: 50%;
+			filter: blur(0px);
+		}
+
+		.orb {
+			inset: 14% 11% 32% 16%;
+			background:
+				radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.08) 24%, transparent 26%),
+				radial-gradient(circle at 72% 32%, rgba(71, 243, 212, 0.85), rgba(71, 243, 212, 0.08) 18%, transparent 20%),
+				radial-gradient(circle at 55% 72%, rgba(124, 157, 255, 0.95), rgba(124, 157, 255, 0.1) 16%, transparent 18%),
+				linear-gradient(145deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.01));
+			box-shadow:
+				0 0 0 1px rgba(255, 255, 255, 0.06) inset,
+				0 40px 120px rgba(124, 157, 255, 0.22),
+				0 20px 40px rgba(71, 243, 212, 0.12);
+			animation: float 10s ease-in-out infinite;
+		}
+
+		.orb::before {
+			content: "";
+			inset: 6%;
+			background: radial-gradient(circle, rgba(255, 255, 255, 0.18), transparent 62%);
+			animation: drift 14s linear infinite;
+		}
+
+		.orb::after {
+			content: "";
+			inset: auto 10% 6% 12%;
+			height: 28%;
+			background: linear-gradient(90deg, rgba(255, 122, 200, 0.38), rgba(124, 157, 255, 0.18), rgba(71, 243, 212, 0.36));
+			filter: blur(24px);
+			opacity: 0.9;
+		}
+
+		.visual-card {
+			position: absolute;
+			inset: auto 18px 18px 18px;
+			padding: 18px;
+			border-radius: 22px;
+			background: rgba(6, 12, 25, 0.72);
+			border: 1px solid rgba(255, 255, 255, 0.08);
+			box-shadow: 0 20px 40px rgba(0, 0, 0, 0.26);
+		}
+
+		.visual-card h3 {
+			font-size: 1.25rem;
+			color: #f5f8ff;
+			margin-bottom: 8px;
+		}
+
+		.visual-card p {
+			color: var(--muted);
+			font-size: 0.95rem;
+		}
+
+		.scanline {
+			position: absolute;
+			inset: 0;
+			background: linear-gradient(180deg, transparent, rgba(255, 255, 255, 0.07), transparent);
+			background-size: 100% 220px;
+			animation: scan 8s linear infinite;
+			mix-blend-mode: screen;
+			pointer-events: none;
+		}
+
+		.particles {
+			position: absolute;
+			inset: 0;
+			pointer-events: none;
+			overflow: hidden;
+		}
+
+		.particle {
+			position: absolute;
+			width: var(--size);
+			height: var(--size);
+			border-radius: 50%;
+			background: radial-gradient(circle, rgba(255, 255, 255, 0.92), rgba(124, 157, 255, 0.25) 45%, transparent 72%);
+			box-shadow: 0 0 18px rgba(124, 157, 255, 0.55);
+			opacity: 0.7;
+			animation: driftUp var(--duration) linear infinite;
+			left: var(--left);
+			bottom: -20px;
+			animation-delay: var(--delay);
+		}
+
+		.section {
+			padding: 0 28px 28px;
+		}
+
+		.grid {
+			display: grid;
+			grid-template-columns: 1.2fr 0.8fr;
+			gap: 22px;
+		}
+
+		.stack {
+			display: grid;
+			gap: 22px;
+		}
+
+		.panel {
+			border-radius: 28px;
+			padding: 24px;
+			background: var(--surface);
+			box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
+		}
+
+		.panel-header {
+			display: flex;
+			justify-content: space-between;
+			gap: 16px;
+			align-items: end;
+			margin-bottom: 16px;
+		}
+
+		.panel-header h2 {
+			font-size: clamp(1.25rem, 3vw, 1.8rem);
+			letter-spacing: -0.03em;
+		}
+
+		.panel-header p {
+			color: var(--muted);
+			max-width: 48ch;
+			font-size: 0.95rem;
+		}
+
+		.summary {
+			font-size: 1rem;
+			color: rgba(240, 245, 255, 0.9);
+			line-height: 1.8;
+		}
+
+		.highlight {
+			color: #ffffff;
+			font-weight: 700;
+		}
+
+		.card {
+			border-radius: 24px;
+			padding: 22px;
+			transition: transform 220ms ease, border-color 220ms ease, background 220ms ease;
+		}
+
+		.card:hover {
+			transform: translateY(-4px) scale(1.01);
+			border-color: rgba(124, 157, 255, 0.32);
+			background: rgba(255, 255, 255, 0.06);
+		}
+
+		.experience-title,
+		.project-title {
+			font-size: 1.08rem;
+			margin-bottom: 8px;
+		}
+
+		.meta-row {
+			display: flex;
+			flex-wrap: wrap;
+			gap: 10px;
+			justify-content: space-between;
+			color: var(--muted);
+			font-size: 0.93rem;
+			margin-bottom: 14px;
+		}
+
+		.badge-row,
+		.chips {
+			display: flex;
+			flex-wrap: wrap;
+			gap: 10px;
+		}
+
+		.badge,
+		.chip {
+			border-radius: 999px;
+			padding: 9px 13px;
+			font-size: 0.88rem;
+			font-weight: 600;
+			letter-spacing: 0.01em;
+		}
+
+		.badge {
+			color: #dce5ff;
+		}
+
+		.chip {
+			color: #e9efff;
+			background: rgba(124, 157, 255, 0.1);
+			border: 1px solid rgba(124, 157, 255, 0.18);
+		}
+
+		.list {
+			list-style: none;
+			display: grid;
+			gap: 10px;
+		}
+
+		.list li {
+			position: relative;
+			padding-left: 18px;
+			color: rgba(236, 242, 255, 0.88);
+		}
+
+		.list li::before {
+			content: "";
+			position: absolute;
+			left: 0;
+			top: 10px;
+			width: 8px;
+			height: 8px;
+			border-radius: 50%;
+			background: linear-gradient(135deg, var(--accent-2), var(--accent));
+			box-shadow: 0 0 14px rgba(71, 243, 212, 0.8);
+		}
+
+		.soft {
+			color: var(--muted);
+		}
+
+		.project-grid {
+			display: grid;
+			grid-template-columns: repeat(2, minmax(0, 1fr));
+			gap: 16px;
+		}
+
+		.skill-group + .skill-group {
+			margin-top: 20px;
+		}
+
+		.skill-group h3 {
+			font-size: 1rem;
+			margin-bottom: 12px;
+			color: #f5f8ff;
+		}
+
+		.timeline-list {
+			display: grid;
+			gap: 14px;
+		}
+
+		.timeline-item {
+			padding: 14px 0;
+			border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+		}
+
+		.timeline-item:last-child {
+			border-bottom: 0;
+			padding-bottom: 0;
+		}
+
+		.timeline-item strong {
+			display: block;
+			margin-bottom: 6px;
+		}
+
+		.footer {
+			padding: 0 28px 28px;
+		}
+
+		.footer-inner {
+			padding: 18px 22px;
+			border-radius: 22px;
+			background: rgba(255, 255, 255, 0.04);
+			border: 1px solid rgba(255, 255, 255, 0.08);
+			color: var(--muted);
+			font-size: 0.92rem;
+		}
+
+		.reveal {
+			opacity: 0;
+			transform: translateY(24px) scale(0.99);
+			transition: opacity 700ms ease, transform 700ms ease;
+		}
+
+		.reveal.is-visible {
+			opacity: 1;
+			transform: translateY(0) scale(1);
+		}
+
+		@keyframes float {
+			0%, 100% { transform: translate3d(0, 0, 0); }
+			50% { transform: translate3d(0, -14px, 0); }
+		}
+
+		@keyframes drift {
+			0% { transform: translate3d(0, 0, 0) scale(1); }
+			50% { transform: translate3d(8px, -10px, 0) scale(1.04); }
+			100% { transform: translate3d(0, 0, 0) scale(1); }
+		}
+
+		@keyframes driftUp {
+			0% { transform: translate3d(0, 0, 0) scale(0.8); opacity: 0; }
+			10% { opacity: 0.9; }
+			100% { transform: translate3d(var(--drift), -105vh, 0) scale(1.2); opacity: 0; }
+		}
+
+		@keyframes scan {
+			0% { transform: translateY(-100%); }
+			100% { transform: translateY(100%); }
+		}
+
+		@media (max-width: 1060px) {
+			.hero,
+			.grid,
+			.project-grid {
+				grid-template-columns: 1fr;
+			}
+
+			.hero-visual {
+				min-height: 420px;
+				transform: none;
+			}
+		}
+
+		@media (max-width: 780px) {
+			.page {
+				padding: 12px;
+			}
+
+			.shell {
+				border-radius: 26px;
+			}
+
+			.topbar,
+			.hero,
+			.section,
+			.footer {
+				padding-left: 16px;
+				padding-right: 16px;
+			}
+
+			.topbar {
+				flex-direction: column;
+				align-items: flex-start;
+			}
+
+			.hero-copy,
+			.hero-visual,
+			.panel {
+				border-radius: 22px;
+			}
+
+			.hero-copy {
+				padding: 22px;
+			}
+
+			h1 {
+				font-size: clamp(2.2rem, 14vw, 4rem);
+			}
+
+			.hero-stats {
+				grid-template-columns: 1fr;
+			}
+
+			.hero-visual {
+				min-height: 320px;
+			}
+
+			.visual-card {
+				inset: auto 12px 12px 12px;
+			}
+		}
+
+		@media (prefers-reduced-motion: reduce) {
+			*, *::before, *::after {
+				animation: none !important;
+				transition: none !important;
+				scroll-behavior: auto !important;
+			}
+
+			.reveal {
+				opacity: 1;
+				transform: none;
+			}
+		}
+	</style>
+</head>
+<body>
+	<div class="page">
+		<div class="shell">
+			<div class="particles" aria-hidden="true" id="particles"></div>
+			<header class="topbar">
+				<div class="brand">
+					<strong>Sonali Pramanik</strong>
+					<span>Assistant Software Engineer at TCS | SRE & DevOps</span>
+				</div>
+				<nav class="nav" aria-label="Primary">
+					<a href="#about">About</a>
+					<a href="#experience">Experience</a>
+					<a href="#projects">Projects</a>
+					<a href="#skills">Skills</a>
+					<a href="#contact">Contact</a>
+				</nav>
+			</header>
+
+			<section class="hero" id="top">
+				<div class="hero-copy reveal">
+					<div class="kicker">Cinematic portfolio | SRE and DevOps focus</div>
+					<h1>Building resilient systems with precision, automation, and cloud-scale thinking.</h1>
+					<p class="hero-subtitle">
+						I am <strong>Sonali Pramanik</strong>, an <strong>Assistant Software Engineer at TCS</strong> with <strong>2.5 years of experience</strong> in SRE, DevOps, observability, and backend reliability support. I design automation, dashboards, and cloud workflows that keep platforms fast, stable, and measurable.
+					</p>
+					<div class="contact-row" id="contact">
+						<span class="contact-chip">Kolkata, India</span>
+						<span class="contact-chip">2.5 Years Experience</span>
+						<a class="contact-chip" href="mailto:khushipramanik3026@gmail.com">khushipramanik3026@gmail.com</a>
+						<a class="contact-chip" href="https://www.linkedin.com/in/sonali-pramanik-268046259?utm_source=share_via&utm_content=profile&utm_medium=member_ios" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+						<a class="contact-chip" href="https://github.com/Sonali26Khushi/" target="_blank" rel="noopener noreferrer">GitHub</a>
+					</div>
+					<div class="hero-stats">
+						<div class="metric">
+							<strong>2.5+</strong>
+							<span>Years building operational support, automation, and monitoring workflows at TCS.</span>
+						</div>
+						<div class="metric">
+							<strong>24/7</strong>
+							<span>Reliability mindset for incident handling, SLAs, and production observability.</span>
+						</div>
+						<div class="metric">
+							<strong>Cloud</strong>
+							<span>AWS and GCP exposure across infrastructure support and operations.</span>
+						</div>
+						<div class="metric">
+							<strong>Automation</strong>
+							<span>Python, Bash, CI/CD, scripting, and API-driven tracking workflows.</span>
+						</div>
+					</div>
+				</div>
+
+				<div class="hero-visual reveal" aria-hidden="true">
+					<div class="orb"></div>
+					<div class="scanline"></div>
+					<div class="visual-card">
+						<h3>Live reliability orbit</h3>
+						<p>Observability, cloud operations, and automation layered into one kinetic interface.</p>
+					</div>
+				</div>
+			</section>
+
+			<section class="section" id="about">
+				<div class="panel reveal">
+					<div class="panel-header">
+						<h2>Professional Summary</h2>
+						<p>Focused on resilient operations, monitoring, cloud support, and pragmatic automation.</p>
+					</div>
+					<p class="summary">
+						Assistant Software Engineer at Tata Consultancy Services with 2.5 years of hands-on experience in SRE and DevOps practices. I work across Python and Bash scripting, Grafana, InfluxDB, Linux administration, incident response, SLA tracking, and cloud operations in AWS and GCP. My current focus is on building reliable, measurable, and scalable workflows for production support and platform visibility.
+					</p>
+				</div>
+			</section>
+
+			<section class="section" id="experience">
+				<div class="grid">
+					<div class="stack">
+						<article class="panel reveal">
+							<div class="panel-header">
+								<h2>Experience</h2>
+								<p>Production support, automation, and observability across cloud and Linux environments.</p>
+							</div>
+							<div class="card">
+								<div class="experience-title">Tata Consultancy Services - Assistant Software Engineer</div>
+								<div class="meta-row">
+									<span>Nov 2023 - Present</span>
+									<span>Kolkata, India</span>
+								</div>
+								<ul class="list">
+									<li>Developed automation scripts using Python and Bash for operational workflows, monitoring tasks, and repetitive backend support activities.</li>
+									<li>Built and maintained Grafana and InfluxDB dashboards to track downtime, SLA adherence, and application/server health metrics.</li>
+									<li>Managed Linux servers for troubleshooting, log analysis, process validation, and reliability improvements in production-like environments.</li>
+									<li>Implemented GitHub-based DevOps workflows and contributed to CI/CD pipeline practices for smoother releases.</li>
+									<li>Designed software version and End-of-Life tracking automation using API integrations and data push to InfluxDB.</li>
+									<li>Integrated application and system logs into centralized observability pipelines for faster incident diagnosis.</li>
+								</ul>
+							</div>
+						</article>
+
+						<article class="panel reveal" id="projects">
+							<div class="panel-header">
+								<h2>Projects</h2>
+								<p>Automation and dashboarding work that keeps operational visibility strong.</p>
+							</div>
+							<div class="project-grid">
+								<div class="card project">
+									<div class="project-title">Software Version and EOL Tracking</div>
+									<p class="soft">Built automation to discover running applications, detect versions, fetch End-of-Life data from APIs, and push compliance metrics into InfluxDB.</p>
+								</div>
+								<div class="card project">
+									<div class="project-title">Monitoring Dashboard Automation</div>
+									<p class="soft">Created Grafana dashboards for downtime tracking, SLA monitoring, and server performance visibility to support proactive reliability operations.</p>
+								</div>
+							</div>
+						</article>
+					</div>
+
+					<aside class="stack">
+						<section class="panel reveal" id="skills">
+							<div class="panel-header">
+								<h2>Technical Skills</h2>
+								<p>Core tools and systems used for build, release, monitoring, and support.</p>
+							</div>
+							<div class="skill-group">
+								<h3>Programming and Scripting</h3>
+								<div class="chips">
+									<span class="chip">Python</span>
+									<span class="chip">Java</span>
+									<span class="chip">Bash</span>
+									<span class="chip">Shell Scripting</span>
+									<span class="chip">JavaScript</span>
+								</div>
+							</div>
+							<div class="skill-group">
+								<h3>Cloud and DevOps</h3>
+								<div class="chips">
+									<span class="chip">AWS</span>
+									<span class="chip">GCP</span>
+									<span class="chip">Docker</span>
+									<span class="chip">Kubernetes</span>
+									<span class="chip">Terraform</span>
+									<span class="chip">Ansible</span>
+									<span class="chip">GitHub</span>
+									<span class="chip">CI/CD</span>
+								</div>
+							</div>
+							<div class="skill-group">
+								<h3>Monitoring and Operations</h3>
+								<div class="chips">
+									<span class="chip">Grafana</span>
+									<span class="chip">InfluxDB</span>
+									<span class="chip">Linux Administration</span>
+									<span class="chip">Incident Management</span>
+									<span class="chip">SLA Monitoring</span>
+									<span class="chip">REST APIs</span>
+									<span class="chip">Automation Scripts</span>
+								</div>
+							</div>
+						</section>
+
+						<section class="panel reveal">
+							<div class="panel-header">
+								<h2>Certifications</h2>
+								<p>Cloud fundamentals and training that support the engineering stack.</p>
+							</div>
+							<div class="timeline-list">
+								<div class="timeline-item"><strong>AWS Cloud Practitioner Certified</strong></div>
+								<div class="timeline-item"><strong>Google Cloud Digital Leader Certified</strong></div>
+								<div class="timeline-item"><strong>Spring Boot Training</strong></div>
+								<div class="timeline-item"><strong>AWS Training - Elisa Project</strong></div>
+							</div>
+						</section>
+
+						<section class="panel reveal">
+							<div class="panel-header">
+								<h2>Education</h2>
+								<p>Academic background supporting software and systems work.</p>
+							</div>
+							<div class="timeline-list">
+								<div class="timeline-item"><strong>Master of Computer Applications (MCA)</strong><span class="soft">Sastra University | 2024</span></div>
+								<div class="timeline-item"><strong>Bachelor of Computer Science</strong><span class="soft">Driems School of Professional Studies | 2023</span></div>
+								<div class="timeline-item"><strong>Intermediate (CBSE)</strong><span class="soft">Surajmul Dayanand Anglo Vedic School</span></div>
+								<div class="timeline-item"><strong>Matriculation (ICSE)</strong><span class="soft">St. Xavier's English School</span></div>
+							</div>
+						</section>
+
+						<section class="panel reveal">
+							<div class="panel-header">
+								<h2>Languages and Interests</h2>
+								<p>Personal and communication profile in a compact format.</p>
+							</div>
+							<div class="timeline-list">
+								<div class="timeline-item"><strong>Languages</strong><span class="soft">English, Hindi, Bengali</span></div>
+								<div class="timeline-item"><strong>Interests</strong><span class="soft">Learning new technologies, automation, monitoring tools, and platform reliability</span></div>
+							</div>
+						</section>
+					</aside>
+				</div>
+			</section>
+
+			<footer class="footer">
+				<div class="footer-inner reveal">
+					Designed as a cinematic, responsive portfolio with layered gradients, glass panels, and motion-rich scrolling. Replace the contact details or project copy as needed, but the layout is now mobile-first and ready for a stronger personal brand.
+				</div>
+			</footer>
+		</div>
+	</div>
+
+	<script>
+		const particlesLayer = document.getElementById("particles");
+		const particleCount = 24;
+
+		for (let index = 0; index < particleCount; index += 1) {
+			const particle = document.createElement("span");
+			particle.className = "particle";
+			particle.style.setProperty("--size", `${Math.random() * 6 + 2}px`);
+			particle.style.setProperty("--left", `${Math.random() * 100}%`);
+			particle.style.setProperty("--duration", `${10 + Math.random() * 14}s`);
+			particle.style.setProperty("--delay", `${Math.random() * -20}s`);
+			particle.style.setProperty("--drift", `${(Math.random() * 2 - 1) * 60}px`);
+			particlesLayer.appendChild(particle);
+		}
+
+		const revealNodes = document.querySelectorAll(".reveal");
+		const observer = new IntersectionObserver(
+			(entries) => {
+				entries.forEach((entry) => {
+					if (entry.isIntersecting) {
+						entry.target.classList.add("is-visible");
+						observer.unobserve(entry.target);
+					}
+				});
+			},
+			{ threshold: 0.18 }
+		);
+
+		revealNodes.forEach((node) => observer.observe(node));
+
+		const shell = document.querySelector(".shell");
+		window.addEventListener("mousemove", (event) => {
+			const x = (event.clientX / window.innerWidth - 0.5) * 10;
+			const y = (event.clientY / window.innerHeight - 0.5) * 10;
+			shell.style.transform = `perspective(1400px) rotateX(${y * -0.3}deg) rotateY(${x * 0.35}deg)`;
+		});
+
+		window.addEventListener("mouseleave", () => {
+			shell.style.transform = "none";
+		});
+	</script>
+</body>
+</html>
